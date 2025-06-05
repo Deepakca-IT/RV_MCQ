@@ -34,12 +34,15 @@ if uploaded_file:
 
 # Function to get next question
 def get_next_question():
-    remaining = [i for i in range(len(st.session_state.questions)) if i not in st.session_state.used_indexes]
+    questions = st.session_state.get('questions', [])
+    if not questions:
+        return None, -1
+    remaining = [i for i in range(len(questions)) if i not in st.session_state.used_indexes]
     if not remaining:
         return None, -1
     index = random.choice(remaining)
     st.session_state.used_indexes.add(index)
-    return st.session_state.questions[index], index
+    return questions[index], index
 
 # Function to show result
 def show_result():
@@ -56,9 +59,9 @@ def show_result():
         st.download_button("📥 Download Wrong Answers", data='\n'.join([f"Q: {q['question']} | Your: {q['your_answer']} | Correct: {q['correct']}" for q in wrongs]), file_name="wrong_answers.txt")
 
     if st.button("🔁 Back to Menu"):
-        for key in st.session_state:
-            st.session_state[key] = None
-        st.experimental_rerun()
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        st.rerun()
 
 # Main Menu
 if not st.session_state.mode:
@@ -87,13 +90,13 @@ if st.session_state.mode == "practice":
             else:
                 st.error(f"❌ Wrong. Correct Answer is {question['correct_option'].upper()}")
             if st.button("Next Question"):
-                st.experimental_rerun()
+                st.rerun()
     else:
         st.info("All questions completed.")
         if st.button("Back to Menu"):
-            for key in st.session_state:
-                st.session_state[key] = None
-            st.experimental_rerun()
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.rerun()
 
 # TEST MODE
 if st.session_state.mode == "test":
@@ -116,7 +119,7 @@ if st.session_state.mode == "test":
                     st.session_state.score += 1
                 else:
                     st.session_state.score -= 0.25
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.info("No more questions available.")
             show_result()
