@@ -1,6 +1,6 @@
-question,option_a,option_b,option_c,option_d,correct_option
-What is the capital of India?,Mumbai,Delhi,Chennai,Kolkata,b
-What is 2 + 2?,3,4,5,6,b
-Who wrote the Indian national anthem?,Rabindranath Tagore,Bankim Chandra,Mahatma Gandhi,Jawaharlal Nehru,a
-Which planet is known as the Red Planet?,Earth,Mars,Venus,Jupiter,b
-What is the boiling point of water at sea level (in °C)?,90,100,80,120,b
+id,question,option_a,option_b,option_c,option_d,correct_option
+1,What is the capital of India?,Mumbai,Delhi,Chennai,Kolkata,b
+2,What is 2 + 2?,3,4,5,6,b
+3,Who wrote the Indian national anthem?,Rabindranath Tagore,Bankim Chandra,Mahatma Gandhi,Jawaharlal Nehru,a
+4,Which planet is known as the Red Planet?,Earth,Mars,Venus,Jupiter,b
+5,What is the boiling point of water at sea level (in °C)?,90,100,80,120,b
